@@ -2,22 +2,22 @@
 #define ESP_PDM_DRIVER_H
 
 #include "esp_err.h"
+#include "driver/i2s.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-// Function to initialize the PDM I2S driver
-esp_err_t pdm_i2s_init(void);
-
-// Function to read audio data from the PDM I2S driver
-esp_err_t pdm_i2s_read_audio(void *buffer, size_t size);
-
-// Function to set the sample rate for the PDM I2S driver
-esp_err_t pdm_i2s_set_sample_rate(int sample_rate);
-
-// Function to deinitialize the PDM I2S driver
-esp_err_t pdm_i2s_deinit(void);
+/**
+ * @brief Initialize an I2S channel in PDM RX mode
+ *
+ * @param pdm_data_gpio GPIO number for PDM data input
+ * @param pdm_clock_gpio GPIO number for PDM clock input
+ * @param sample_rate Sample rate for the PDM data
+ *
+ * @return i2s_chan_handle_t Handle to the I2S channel
+ */
+i2s_chan_handle_t pdm_i2s_init(gpio_num_t pdm_data_gpio, gpio_num_t pdm_clock_gpio, uint16_t sample_rate);
 
 #ifdef __cplusplus
 }
